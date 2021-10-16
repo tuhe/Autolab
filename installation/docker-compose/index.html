@@ -1109,11 +1109,11 @@
 <p>This user has full permissions on Autolab and will be able to create other users and designate other admins.</p>
 </li>
 <li>
-<p>Change <code>DOCKER_TANGO_HOST_VOLUME_PATH</code> in <code>docker-compose.yml</code> to be the absolute path to the Tango <code>volumes</code> directory, i.e <code>/&lt;path-to-docker-compose-installation&gt;/Tango/volumes</code>. This is so that Tango knows where to put the output files of its autograded jobs.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># in docker-compose.yml</span>
+<p>Change <code>DOCKER_TANGO_HOST_VOLUME_PATH</code> in <code>.env</code> to be the absolute path to the Tango <code>volumes</code> directory, i.e <code>/&lt;path-to-docker-compose-installation&gt;/Tango/volumes</code>. This is so that Tango knows where to put the output files of its autograded jobs.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># in .env</span>
 
 <span class="c1"># Modify the below to be the path to volumes on your host machine</span>
-- <span class="nv">DOCKER_TANGO_HOST_VOLUME_PATH</span><span class="o">=</span>/home/your-user/autolab-docker/Tango/volumes <span class="c1"># example path</span>
+<span class="nv">DOCKER_TANGO_HOST_VOLUME_PATH</span><span class="o">=</span>/home/your-user/autolab-docker/Tango/volumes
 </code></pre></div>
 
 </li>
@@ -1141,7 +1141,7 @@
 
 </li>
 </ol>
-<p>Autolab should now be accessible on port 80 (and 443 if you configured TLS)!</p>
+<p>Autolab should now be accessible on port 80 (and 443 if you configured TLS)! You can now go on to configure mailing, <a href="/installation/mailing/">follow the instructions for setting up mailing</a> with the only difference being that the paths mentioned are relative to the directory <code>Autolab/</code>.</p>
 <h2 id="configuring-tlsssl">Configuring TLS/SSL</h2>
 <p>Having TLS/SSL configured is important as it helps to ensure that sensitive information like user credentials and submission information are encrypted instead of being sent over in plaintext across the network when users are using Autolab. We have made setting up TLS as easy and pain-free as possible. Using TLS is strongly recommended if you are using Autolab in a production environment with real students and instructors.</p>
 <p>There are three options for TLS: using Let's Encrypt (for free TLS certificates), using your own certificate, and not using TLS (suitable for local testing/development, but not recommended for production deployment).</p>
@@ -1176,19 +1176,23 @@
 <h3 id="option-3-no-tls-not-recommended-only-for-local-developmenttesting">Option 3: No TLS (not recommended, only for local development/testing)</h3>
 <ol>
 <li>
-<p>In <code>docker-compose.yml</code> (for all the subsequent steps), comment out the following:</p>
+<p>In <code>docker-compose.yml</code>, comment out the following:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Comment the below out to disable SSL (not recommended)</span>
 - ./nginx/app.conf:/etc/nginx/sites-enabled/webapp.conf
 </code></pre></div>
 
-<p>Also uncomment the following:</p>
+</li>
+<li>
+<p>In <code>docker-compose.yml</code>, also uncomment the following:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Uncomment the below to disable SSL (not recommended)</span>
 <span class="c1"># - ./nginx/no-ssl-app.conf:/etc/nginx/sites-enabled/webapp.conf</span>
 </code></pre></div>
 
-<p>Lastly set <code>DOCKER_SSL=false</code>:</p>
-<div class="codehilite"><pre><span></span><code>environment:
-- <span class="nv">DOCKER_SSL</span><span class="o">=</span><span class="nb">true</span>                         <span class="c1"># set to false for no SSL (not recommended)</span>
+</li>
+<li>
+<p>Lastly, in <code>.env</code> file, set <code>DOCKER_SSL=false</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># set to false for no SSL (not recommended)</span>
+<span class="nv">DOCKER_SSL</span><span class="o">=</span><span class="nb">false</span>
 </code></pre></div>
 
 </li>

@@ -451,9 +451,46 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Mailing Setup
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Mailing Setup
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mailing-for-autolab-docker-installation" class="md-nav__link">
+    Mailing for Autolab Docker Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mailing-for-autolab-manual-installation" class="md-nav__link">
+    Mailing for Autolab Manual Installation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -897,7 +934,41 @@
                 
                 <h1 id="mailing-setup">Mailing Setup</h1>
 <p>Autolab requires mailing to allow users to register accounts and reset passwords. You will also be able to make announcements through Autolab as well. The recommended approach is to setup Autolab to use a SMTP server, such as <a href="https://mailgun.com">mailgun</a>, <a href="https://sendgrid.com">SendGrid</a>, <a href="https://aws.amazon.com/ses/">Amazon SES</a> or any other valid SMTP mail servers to send out email.</p>
-<p>We intend this instructions mainly for production usage. To set Autolab up to use a custom SMTP Server, edit the following in <code>production.rb</code> that you have created. (If you would like to test it in development, add the following settings into <code>development.rb</code>). Both <code>production.rb</code> and <code>development.rb</code> are located at <code>config/environments</code></p>
+<p>We intend this instructions mainly for production usage. </p>
+<h2 id="mailing-for-autolab-docker-installation">Mailing for Autolab Docker Installation</h2>
+<p>To set Autolab Docker up for a custom SMTP Server, update the following in <code>.env</code> that was created for you. </p>
+<ol>
+<li>
+<p>Update the host domain</p>
+<div class="codehilite"><pre><span></span><code>HOST_PROTOCOL=http
+HOST_DOMAIN=example.com
+</code></pre></div>
+
+</li>
+<li>
+<p>Update custom smtp settings</p>
+<div class="codehilite"><pre><span></span><code>SMTP_SETTINGS_ADDRESS=smtp.example.com
+SMTP_SETTINGS_PORT=25
+SMTP_SETTINGS_ENABLE_STARTTLS_AUTO=true
+SMTP_SETTINGS_AUTHENTICATION=login
+SMTP_SETTINGS_USER_NAME=example
+SMTP_SETTINGS_PASSWORD=example
+SMTP_SETTINGS_DOMAIN=example.com
+</code></pre></div>
+
+<p>Refer to the SMTP settings instructions that your selected service provides you such as <a href="https://sendgrid.com/docs/for-developers/sending-email/rubyonrails/">SendGrid SMTP for Ruby on Rails</a>, <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html">Amazon SES</a>.</p>
+</li>
+<li>
+<p>Update from setting</p>
+<div class="codehilite"><pre><span></span><code><span class="n">SMTP_DEFAULT_FROM</span><span class="o">=</span><span class="k">from</span><span class="nv">@example</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+</code></pre></div>
+
+<p>Here the from address <strong>must</strong> be a address that your SMTP service permits you to send from. Oftentimes it is the same as your user_name in the smtp settings.</p>
+</li>
+</ol>
+<p>After which, doing a <code>docker-compose down</code> followed by <code>docker-compose up -d</code> will allow you to see the changes.</p>
+<h2 id="mailing-for-autolab-manual-installation">Mailing for Autolab Manual Installation</h2>
+<p>To set Autolab up to use a custom SMTP Server, edit the following in <code>production.rb</code> that you have created. (If you would like to test it in development, add the following settings into <code>development.rb</code>). Both <code>production.rb</code> and <code>development.rb</code> are located at <code>config/environments</code></p>
 <ol>
 <li>
 <p>Update the host domain of your Autolab frontend instance</p>
@@ -929,7 +1000,9 @@
 <p>Here the from address <strong>must</strong> be a address that your SMTP service permits you to send from. Oftentimes it is the same as your user_name in the smtp settings.</p>
 </li>
 </ol>
-<p>Make sure to restart your Autolab client to see the changes </p>
+<p>Make sure to restart your Autolab client to see the changes.</p>
+<h1 id="i-dont-have-a-domain-name-will-mailing-work">I don't have a domain name, will mailing work?</h1>
+<p>Mailing has been tested to work with SendGrid without a domain name (using the IP of the server as the domain name for the purposes of the configuration above), although the absence of a domain name will likely result in the email to be flagged as spam. For the purpose of testing, a testing mailbox service like <a href="https://mailtrap.io/">MailTrap</a> is recommended.</p>
                 
               
               
