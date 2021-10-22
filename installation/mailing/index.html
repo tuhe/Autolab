@@ -940,27 +940,27 @@
 <ol>
 <li>
 <p>Update the host domain</p>
-<div class="codehilite"><pre><span></span><code>HOST_PROTOCOL=http
-HOST_DOMAIN=example.com
+<div class="codehilite"><pre><span></span><code><span class="err">HOST_PROTOCOL=http</span>
+<span class="err">HOST_DOMAIN=example.com</span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Update custom smtp settings</p>
-<div class="codehilite"><pre><span></span><code>SMTP_SETTINGS_ADDRESS=smtp.example.com
-SMTP_SETTINGS_PORT=25
-SMTP_SETTINGS_ENABLE_STARTTLS_AUTO=true
-SMTP_SETTINGS_AUTHENTICATION=login
-SMTP_SETTINGS_USER_NAME=example
-SMTP_SETTINGS_PASSWORD=example
-SMTP_SETTINGS_DOMAIN=example.com
+<div class="codehilite"><pre><span></span><code><span class="err">SMTP_SETTINGS_ADDRESS=smtp.example.com</span>
+<span class="err">SMTP_SETTINGS_PORT=25</span>
+<span class="err">SMTP_SETTINGS_ENABLE_STARTTLS_AUTO=true</span>
+<span class="err">SMTP_SETTINGS_AUTHENTICATION=login</span>
+<span class="err">SMTP_SETTINGS_USER_NAME=example</span>
+<span class="err">SMTP_SETTINGS_PASSWORD=example</span>
+<span class="err">SMTP_SETTINGS_DOMAIN=example.com</span>
 </code></pre></div>
 
 <p>Refer to the SMTP settings instructions that your selected service provides you such as <a href="https://sendgrid.com/docs/for-developers/sending-email/rubyonrails/">SendGrid SMTP for Ruby on Rails</a>, <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html">Amazon SES</a>.</p>
 </li>
 <li>
 <p>Update from setting</p>
-<div class="codehilite"><pre><span></span><code><span class="n">SMTP_DEFAULT_FROM</span><span class="o">=</span><span class="k">from</span><span class="nv">@example</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="err">SMTP_DEFAULT_FROM=from@example.com</span>
 </code></pre></div>
 
 <p>Here the from address <strong>must</strong> be a address that your SMTP service permits you to send from. Oftentimes it is the same as your user_name in the smtp settings.</p>

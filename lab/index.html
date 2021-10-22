@@ -1062,7 +1062,7 @@
                 
                 
                 <h1 id="guide-for-lab-authors">Guide for Lab Authors</h1>
-<p>This guide explains how to create autograded programming assignments (labs) for the Autolab system.</p>
+<p>This guide explains how to create autograded programming assignments (labs) for the Autolab system. While <strong>reading through the documentation is recommended</strong>, for a quick start, here's a <a href="https://youtu.be/GQ2EkBcRH4k" target="_blank">short video</a> that gives a brief introduction of autograders.</p>
 <h2 id="writing-autograders">Writing Autograders</h2>
 <p>An <em>autograder</em> is a program that takes a student's work as input, and generates some quantitative evaluation of that work as output. The student's work consists of one or more source files written in an arbitrary programming language.
 The autograder processes these files and generates arbitrary text lines on stdout. The last text line on stdout must be a JSON string, called an <em>autoresult</em>, that assigns an autograded score to one or more problems, and optionally, generates the scoreboard entries for this submission.</p>
@@ -1124,7 +1124,7 @@ The autograder processes these files and generates arbitrary text lines on stdou
 <h3 id="directory-structure">Directory Structure</h3>
 <p>Autolab expects to find the <code>autograde-Makefile</code>and <code>autograde.tar</code> files in the <code>hello</code> lab directory, but otherwise places no constraints on the contents and organization of this directory. However, based on our experience, we strongly recommend a directory structure with the following form:</p>
 <p><a href="https://github.com/autolab/Autolab/tree/master/examples/hello/README" target="_blank">hello/README</a>:</p>
-<div class="codehilite"><pre><span></span><code><span class="gh"># Basic files created by the lab author</span>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Basic files created by the lab author
 
 Makefile              Builds the lab from src/
 README
@@ -1133,7 +1133,7 @@ src/                  Contains all src files and solutions
 test-autograder/      For testing autograder offline
 writeup/              Lab writeup that students view from Autolab
 
-<span class="gh"># Files created by running make</span>
+<span class="gh">#</span> Files created by running make
 
 hello-handout/        The directory that is handed out to students, created
                       using files from src/.
@@ -1141,7 +1141,7 @@ hello-handout.tar     Archive of hello-handout directory
 autograde.tar         File that is copied to the autograding instance
                       (along with autograde-Makefile and student handin file)
 
-<span class="gh"># Files created and managed by Autolab</span>
+<span class="gh">#</span> Files created and managed by Autolab
 
 handin/               All students handin files
 hello.rb              Config file
@@ -1203,16 +1203,16 @@ log.txt               Log of autograded submissions
 <p>The <a href="https://github.com/autolab/Autolab/tree/master/examples/hello/src" target="_blank">hello/src/</a> directory
 contains <em>all</em> of the code files for the Hello Lab, including the files that are handed out to students:</p>
 <p><a href="https://github.com/autolab/Autolab/tree/master/examples/hello/src/README" target="_blank">hello/src/README</a>:</p>
-<div class="codehilite"><pre><span></span><code># <span class="nv">Autograder</span> <span class="nv">and</span> <span class="nv">solution</span> <span class="nv">files</span>
-<span class="nv">Makefile</span>                <span class="nv">Makefile</span> <span class="nv">and</span> ...
-<span class="nv">README</span>                  ... <span class="nv">README</span> <span class="k">for</span> <span class="nv">this</span> <span class="nv">directory</span>
-<span class="nv">driver</span>.<span class="nv">sh</span><span class="o">*</span>              <span class="nv">Autograder</span>
-<span class="nv">hello</span>.<span class="nv">c</span>                 <span class="nv">Solution</span> <span class="nv">hello</span>.<span class="nv">c</span> <span class="nv">file</span>
+<div class="codehilite"><pre><span></span><code><span class="o">#</span> <span class="n">Autograder</span> <span class="k">and</span> <span class="n">solution</span> <span class="n">files</span>
+<span class="n">Makefile</span>                <span class="n">Makefile</span> <span class="k">and</span> <span class="p">...</span>
+<span class="n">README</span>                  <span class="p">...</span> <span class="n">README</span> <span class="k">for</span> <span class="n">this</span> <span class="n">directory</span>
+<span class="n">driver</span><span class="p">.</span><span class="n">sh</span><span class="o">*</span>              <span class="n">Autograder</span>
+<span class="n">hello</span><span class="p">.</span><span class="k">c</span>                 <span class="n">Solution</span> <span class="n">hello</span><span class="p">.</span><span class="k">c</span> <span class="n">file</span>
 
-# <span class="nv">Files</span> <span class="nv">that</span> <span class="nv">are</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
-<span class="nv">Makefile</span><span class="o">-</span><span class="nv">handout</span>        <span class="nv">Makefile</span> <span class="nv">and</span> ...
-<span class="nv">README</span><span class="o">-</span><span class="nv">handout</span>          ... <span class="nv">README</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
-<span class="nv">hello</span>.<span class="nv">c</span><span class="o">-</span><span class="nv">handout</span>         <span class="nv">Blank</span> <span class="nv">hello</span>.<span class="nv">c</span> <span class="nv">file</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
+<span class="o">#</span> <span class="n">Files</span> <span class="n">that</span> <span class="k">are</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
+<span class="n">Makefile</span><span class="o">-</span><span class="n">handout</span>        <span class="n">Makefile</span> <span class="k">and</span> <span class="p">...</span>
+<span class="n">README</span><span class="o">-</span><span class="n">handout</span>          <span class="p">...</span> <span class="n">README</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
+<span class="n">hello</span><span class="p">.</span><span class="k">c</span><span class="o">-</span><span class="n">handout</span>         <span class="n">Blank</span> <span class="n">hello</span><span class="p">.</span><span class="k">c</span> <span class="n">file</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
 </code></pre></div>
 
 <h3 id="handout-directory">Handout Directory</h3>
