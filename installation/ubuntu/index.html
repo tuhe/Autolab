@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/ubuntu/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -447,6 +447,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -899,6 +913,7 @@ sudo apt-get upgrade
 sudo apt-get install build-essential git libffi-dev zlib1g-dev autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev libncurses5-dev libgdbm5 libgdbm-dev libmysqlclient-dev libjansson-dev ctags
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Cloning Autolab repo from Github to ~/Autolab</p>
@@ -906,6 +921,7 @@ sudo apt-get install build-essential git libffi-dev zlib1g-dev autoconf bison bu
 git clone https://github.com/autolab/Autolab.git
 <span class="nb">cd</span> Autolab
 </code></pre></div>
+
 
 </li>
 <li>
@@ -920,6 +936,7 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Installing Ruby (Based on ruby version)</p>
@@ -927,11 +944,13 @@ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-bu
 rbenv install  <span class="sb">`</span>cat .ruby-version<span class="sb">`</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Installing SQLite</p>
 <div class="codehilite"><pre><span></span><code>sudo apt-get install sqlite3 libsqlite3-dev
 </code></pre></div>
+
 
 </li>
 <li>
@@ -949,6 +968,7 @@ sudo mysql_secure_installation
 * Reload Privilege Tables Now? Y
 </code></pre></div>
 
+
 </li>
 <li>
 <p>(If you are using MySQL) Create a new user with access to <code>autolab_test</code> and <code>autolab_development</code> databases. Because a password rather than auth_socket is needed, we need to ensure that user uses <code>mysql_native_password</code></p>
@@ -957,6 +977,7 @@ mysql&gt; CREATE USER <span class="s1">&#39;user1&#39;</span>@<span class="s1">&
 mysql&gt; FLUSH PRIVILEGES<span class="p">;</span>
 mysql&gt; exit<span class="p">;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -967,16 +988,23 @@ rbenv rehash
 bundle install
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Initializing Autolab Configs</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span> Autolab
 cp config/database.yml.template config/database.yml
 cp config/school.yml.template config/school.yml
-cp config/initializers/devise.rb.template config/initializers/devise.rb
-sed -i <span class="s2">&quot;s/&lt;YOUR-SECRET-KEY&gt;/`bundle exec rails secret`/g&quot;</span> config/initializers/devise.rb
 cp config/autogradeConfig.rb.template config/autogradeConfig.rb
 </code></pre></div>
+
+
+</li>
+<li>
+<p>Initialize application secrets.</p>
+<div class="codehilite"><pre><span></span><code>./bin/initialize_secrets.sh
+</code></pre></div>
+
 
 </li>
 <li>
@@ -1005,6 +1033,7 @@ Change the <username> and <password> fields in config/database.yml to the userna
         <span class="n">sql_mode</span><span class="o">:</span> <span class="n">NO_ENGINE_SUBSTITUTION</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>(Using SQLite) Editing Database YML.
@@ -1022,6 +1051,7 @@ Comment out the configurations meant for MySQL in config/database.yml, and inser
     <span class="n">timeout</span><span class="o">:</span> <span class="mi">5000</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Granting permissions on the databases. Setting global sql mode is important to relax the rules of mysql when it comes to group by mode</p>
@@ -1032,6 +1062,7 @@ mysql&gt; SET GLOBAL <span class="nv">sql_mode</span><span class="o">=(</span>SE
 mysql&gt; <span class="nb">exit</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Initializing Autolab Database</p>
@@ -1040,6 +1071,7 @@ bundle <span class="nb">exec</span> rails db:create
 bundle <span class="nb">exec</span> rails db:reset
 bundle <span class="nb">exec</span> rails db:migrate
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1051,12 +1083,14 @@ bundle <span class="nb">exec</span> rails db:migrate
 ./bin/initialize_user.sh -d
 </code></pre></div>
 
+
 </li>
 <li>
 <p>If you are just testing Autolab, you can populate the database with sample course &amp; students</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span> Autolab
 bundle <span class="nb">exec</span> rails autolab:populate
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1065,11 +1099,13 @@ bundle <span class="nb">exec</span> rails autolab:populate
 bundle <span class="nb">exec</span> rails s -p <span class="m">3000</span> --binding<span class="o">=</span><span class="m">0</span>.0.0.0
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Visit localhost:3000 on your browser to view your local deployment of Autolab, and login with either the credentials of the root user you just created, or choose <code>Developer Login</code> with</p>
-<div class="codehilite"><pre><span></span><code><span class="c">Email: &quot;admin@foo.bar&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nl">Email</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;admin@foo.bar&quot;</span><span class="w"></span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1077,6 +1113,9 @@ bundle <span class="nb">exec</span> rails s -p <span class="m">3000</span> --bin
 </li>
 <li>
 <p>If you would like to deploy the server, you can try out <a href="https://www.phusionpassenger.com/library/walkthroughs/start/ruby.html" target="_blank">Phusion Passenger</a>.</p>
+</li>
+<li>
+<p>If you would like to configure Github integration to allow students to submit via Github, please follow the <a href="/installation/github_integration">Github integration setup instructions</a>.</p>
 </li>
 <li>
 <p>Now you are all set to start using Autolab! Visit the <a href="/instructors">Guide for Instructors</a> and <a href="/lab">Guide for Lab Authors</a> pages for more info.</p>
@@ -1176,10 +1215,10 @@ bundle <span class="nb">exec</span> rails s -p <span class="m">3000</span> --bin
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

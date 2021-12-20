@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/mailing/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -461,6 +461,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -492,6 +494,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
+      </a>
     </li>
   
 
@@ -940,28 +956,31 @@
 <ol>
 <li>
 <p>Update the host domain</p>
-<div class="codehilite"><pre><span></span><code><span class="err">HOST_PROTOCOL=http</span>
-<span class="err">HOST_DOMAIN=example.com</span>
+<div class="codehilite"><pre><span></span><code>HOST_PROTOCOL=http
+HOST_DOMAIN=example.com
 </code></pre></div>
+
 
 </li>
 <li>
 <p>Update custom smtp settings</p>
-<div class="codehilite"><pre><span></span><code><span class="err">SMTP_SETTINGS_ADDRESS=smtp.example.com</span>
-<span class="err">SMTP_SETTINGS_PORT=25</span>
-<span class="err">SMTP_SETTINGS_ENABLE_STARTTLS_AUTO=true</span>
-<span class="err">SMTP_SETTINGS_AUTHENTICATION=login</span>
-<span class="err">SMTP_SETTINGS_USER_NAME=example</span>
-<span class="err">SMTP_SETTINGS_PASSWORD=example</span>
-<span class="err">SMTP_SETTINGS_DOMAIN=example.com</span>
+<div class="codehilite"><pre><span></span><code>SMTP_SETTINGS_ADDRESS=smtp.example.com
+SMTP_SETTINGS_PORT=25
+SMTP_SETTINGS_ENABLE_STARTTLS_AUTO=true
+SMTP_SETTINGS_AUTHENTICATION=login
+SMTP_SETTINGS_USER_NAME=example
+SMTP_SETTINGS_PASSWORD=example
+SMTP_SETTINGS_DOMAIN=example.com
 </code></pre></div>
+
 
 <p>Refer to the SMTP settings instructions that your selected service provides you such as <a href="https://sendgrid.com/docs/for-developers/sending-email/rubyonrails/">SendGrid SMTP for Ruby on Rails</a>, <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html">Amazon SES</a>.</p>
 </li>
 <li>
 <p>Update from setting</p>
-<div class="codehilite"><pre><span></span><code><span class="err">SMTP_DEFAULT_FROM=from@example.com</span>
+<div class="codehilite"><pre><span></span><code><span class="n">SMTP_DEFAULT_FROM</span><span class="o">=</span><span class="k">from</span><span class="nv">@example</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
 </code></pre></div>
+
 
 <p>Here the from address <strong>must</strong> be a address that your SMTP service permits you to send from. Oftentimes it is the same as your user_name in the smtp settings.</p>
 </li>
@@ -974,6 +993,7 @@
 <p>Update the host domain of your Autolab frontend instance</p>
 <div class="codehilite"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">default_url_options</span> <span class="o">=</span> <span class="p">{</span><span class="ss">protocol</span><span class="p">:</span> <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="s1">&#39;yourhost.com&#39;</span> <span class="p">}</span>
 </code></pre></div>
+
 
 <p>Host here should be the domain in which Autolab is hosted on. (e.g. <code>autolab.andrew.cmu.edu</code>)</p>
 </li>
@@ -990,12 +1010,14 @@
 <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Refer to the SMTP settings instructions that your selected service provides you such as <a href="https://sendgrid.com/docs/for-developers/sending-email/rubyonrails/">SendGrid SMTP for Ruby on Rails</a>, <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html">Amazon SES</a>.</p>
 </li>
 <li>
 <p>Update the "from" setting</p>
 <div class="codehilite"><pre><span></span><code><span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s1">&#39;something@example.com&#39;</span>
 </code></pre></div>
+
 
 <p>Here the from address <strong>must</strong> be a address that your SMTP service permits you to send from. Oftentimes it is the same as your user_name in the smtp settings.</p>
 </li>
@@ -1038,13 +1060,13 @@
       
       
         
-        <a href="../tango/" class="md-footer__link md-footer__link--next" aria-label="Next: Tango" rel="next">
+        <a href="../github_integration/" class="md-footer__link md-footer__link--next" aria-label="Next: Github Integration Setup" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Tango
+              Github Integration Setup
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1097,10 +1119,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

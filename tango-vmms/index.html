@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/tango-vmms/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -440,6 +440,20 @@
     <li class="md-nav__item">
       <a href="../installation/mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -869,6 +883,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -992,40 +1008,48 @@
 <div class="codehilite"><pre><span></span><code><span class="n">initializeVM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Creates a new VM instance for the VMMS based on the fields of <code>vm</code>, which is a <code>TangoMachine</code> object defined in <code>tangoObjects.py</code>.</p>
 <h3 id="waitvm">waitVM</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">waitVM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">,</span> <span class="n">max_secs</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>Waits at most <code>max_secs</code> for a VM to be ready to run jobs. Returns an error if the VM is not ready after <code>max_secs</code>.</p>
 <h3 id="copyin">copyIn</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">copyIn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">,</span> <span class="n">inputFiles</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Copies the input files for a job into the VM. <code>inputFiles</code> is a list of <code>InputFile</code> objects defined in <code>tangoObjects.py</code>. For each <code>InputFile</code> object, <code>file.localFile</code> is the name of the file on the Tango host machine and <code>file.destFile</code> is what the name of the file should be on the VM.</p>
 <h3 id="runjob">runJob</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">runJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">,</span> <span class="n">runTimeout</span><span class="p">,</span> <span class="n">maxOutputFileSize</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>Runs the autodriver binary on the VM. The autodriver runs <code>make</code> on the VM (which in turn runs the job via the <code>Makefile</code> that was provided as a part of the input files for the job). The output from the autodriver most likely should be redirected to some feedback file to be used in the next method of the API.</p>
 <h3 id="copyout">copyOut</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">copyOut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">,</span> <span class="n">destFile</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Copies the output file for the job out of the VM into <code>destFile</code> on the Tango host machine.</p>
 <h3 id="destroyvm">destroyVM</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">destroyVM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>Removes a VM from the Tango system.</p>
 <h3 id="safedestroyvm">safeDestroyVM</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">safeDestroyVM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vm</span><span class="p">)</span>
 </code></pre></div>
 
+
 <p>Removes a VM from the Tango system and makes sure that it has been removed.</p>
 <h3 id="getvms">getVMs</h3>
 <div class="codehilite"><pre><span></span><code><span class="n">getVMs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 </code></pre></div>
+
 
 <p>Returns a complete list of VMs associated with this Tango system.</p>
                 
@@ -1107,10 +1131,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

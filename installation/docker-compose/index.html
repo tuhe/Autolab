@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/docker-compose/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -377,6 +377,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -605,6 +607,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -1057,11 +1073,13 @@
 <div class="codehilite"><pre><span></span><code>git clone --recurse-submodules -j8 git://github.com/autolab/docker.git autolab-docker
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Enter the project directory:</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span> autolab-docker
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1069,11 +1087,13 @@
 <div class="codehilite"><pre><span></span><code>make update
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Create initial default configs:</p>
 <div class="codehilite"><pre><span></span><code>make
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1081,11 +1101,13 @@
 <div class="codehilite"><pre><span></span><code>docker-compose build
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Run the Docker containers:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose up -d
 </code></pre></div>
+
 
 <p>Note at this point Nginx will still be crash-looping in the Autolab container because TLS/SSL has not been configuired/disabled yet.</p>
 </li>
@@ -1094,17 +1116,20 @@
 <div class="codehilite"><pre><span></span><code>make set-perms
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Perform database migrations for Autolab, which will initialize your database schema:</p>
 <div class="codehilite"><pre><span></span><code>make db-migrate
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Create administrative user for Autolab:</p>
 <div class="codehilite"><pre><span></span><code>make create-user
 </code></pre></div>
+
 
 <p>This user has full permissions on Autolab and will be able to create other users and designate other admins.</p>
 </li>
@@ -1116,21 +1141,26 @@
 <span class="nv">DOCKER_TANGO_HOST_VOLUME_PATH</span><span class="o">=</span>/home/your-user/autolab-docker/Tango/volumes
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Stop all containers, as we are going to setup/disable TLS:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose stop
 </code></pre></div>
 
+
 </li>
 <li>
-<p>If you intend to use TLS later, in <code>nginx/app.conf</code>, change instances of <code>&lt;REPLACE_WITH_YOUR_DOMAIN&gt;</code> to your real domain name. Otherwise, if you are not using TLS, in <code>nginx/no-ssl-app.conf</code>, change <code>server_name</code> to your real domain name.</p>
+<p>Update the Nginx config. Update all occurences of <code>REPLACE_WITH_YOUR_DOMAIN</code> in <code>nginx/app.conf</code> and <code>nginx/no-ssl-app.conf</code> to your real domain name. The configs are used when TLS is enabled and disabled respectively. Double-check that ALL occurrences are replaced as otherwise you will have trouble accessing your deployment.</p>
 </li>
 <li>
 <p>Continue with TLS setup as outlined in the <a href="#configuring-tlsssl">next section</a></p>
 </li>
-<li>Build the autograding image(s) that you want to use in Tango (see <a href="/installation/tango/#docker-vmms-setup">the docs</a> for more information). For this setup we will stick to the default Ubuntu 18.04 autograding image: <div class="codehilite"><pre><span></span><code>docker build -t autograding_image Tango/vmms/
+<li>
+<p>Build the autograding image(s) that you want to use in Tango (see <a href="/installation/tango/#docker-vmms-setup">the docs</a> for more information). For this setup we will stick to the default Ubuntu 18.04 autograding image: </p>
+<div class="codehilite"><pre><span></span><code>docker build -t autograding_image Tango/vmms/
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1138,6 +1168,7 @@
 <ol>
 <li>Start up everything: <div class="codehilite"><pre><span></span><code>docker-compose up -d
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1163,6 +1194,7 @@
 <div class="codehilite"><pre><span></span><code>openssl dhparam -out ssl/ssl-dhparams.pem <span class="m">4096</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Uncomment the following lines in <code>docker-compose.yml</code>:</p>
@@ -1170,6 +1202,7 @@
 <span class="c1"># - ./ssl/privkey.pem:/etc/letsencrypt/live/test.autolab.io/privkey.pem;</span>
 <span class="c1"># - ./ssl/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem</span>
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1181,6 +1214,7 @@
 - ./nginx/app.conf:/etc/nginx/sites-enabled/webapp.conf
 </code></pre></div>
 
+
 </li>
 <li>
 <p>In <code>docker-compose.yml</code>, also uncomment the following:</p>
@@ -1188,12 +1222,14 @@
 <span class="c1"># - ./nginx/no-ssl-app.conf:/etc/nginx/sites-enabled/webapp.conf</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Lastly, in <code>.env</code> file, set <code>DOCKER_SSL=false</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># set to false for no SSL (not recommended)</span>
 <span class="nv">DOCKER_SSL</span><span class="o">=</span><span class="nb">false</span>
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1204,11 +1240,13 @@
 <div class="codehilite"><pre><span></span><code>docker-compose stop
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Update your Autolab and Tango repositories:</p>
 <div class="codehilite"><pre><span></span><code>make update
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1216,11 +1254,13 @@
 <div class="codehilite"><pre><span></span><code>docker-compose build
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Re-deploy your containers:</p>
 <div class="codehilite"><pre><span></span><code>docker-compose up
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1236,6 +1276,7 @@ Starting tango     ... <span class="k">done</span>
 Recreating autolab ... <span class="k">done</span>
 </code></pre></div>
 
+
 <p>Use <code>docker-compose up</code> instead to get output from all the containers in real time:</p>
 <div class="codehilite"><pre><span></span><code>$ docker-compose up
 Starting certbot ... <span class="k">done</span>
@@ -1245,7 +1286,7 @@ Starting tango   ... <span class="k">done</span>
 Starting autolab ... <span class="k">done</span>
 Attaching to redis, mysql, certbot, tango, autolab
 mysql      <span class="p">|</span> <span class="o">[</span>Entrypoint<span class="o">]</span> MySQL Docker Image <span class="m">8</span>.0.22-1.1.18
-tango      <span class="p">|</span> <span class="m">2020</span>-11-11 <span class="m">04</span>:33:19,533 CRIT Supervisor running as root <span class="o">(</span>no user in config file<span class="o">)</span>
+tango      <span class="p">|</span> <span class="m">2020</span>-11-11 <span class="m">04</span>:33:19,533 CRIT Supervisor running as root <span class="o">(</span>no user <span class="k">in</span> config file<span class="o">)</span>
 redis      <span class="p">|</span> <span class="m">1</span>:C <span class="m">11</span> Nov <span class="m">2020</span> <span class="m">04</span>:33:19.032 <span class="c1"># oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo</span>
 redis      <span class="p">|</span> <span class="m">1</span>:C <span class="m">11</span> Nov <span class="m">2020</span> <span class="m">04</span>:33:19.032 <span class="c1"># Redis version=6.0.9, bits=64, commit=00000000, modified=0, pid=1, just started</span>
 redis      <span class="p">|</span> <span class="m">1</span>:C <span class="m">11</span> Nov <span class="m">2020</span> <span class="m">04</span>:33:19.032 <span class="c1"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span>
@@ -1257,6 +1298,7 @@ tango      <span class="p">|</span> <span class="m">2020</span>-11-11 <span clas
 mysql      <span class="p">|</span> <span class="m">2020</span>-11-11T04:33:19.476749Z <span class="m">0</span> <span class="o">[</span>System<span class="o">]</span> <span class="o">[</span>MY-010116<span class="o">]</span> <span class="o">[</span>Server<span class="o">]</span> /usr/sbin/mysqld <span class="o">(</span>mysqld <span class="m">8</span>.0.22<span class="o">)</span> starting as process <span class="m">22</span>
 --- output truncated ---
 </code></pre></div>
+
 
 <h3 id="checking-autolab-logs">Checking Autolab logs</h3>
 <p>If the Autolab instance is not working properly, taking a look at both the application logs as well as the Nginx logs in the container will be helpful.</p>
@@ -1270,21 +1312,25 @@ da86acc5a4c3        mysql/mysql-server:latest   <span class="s2">&quot;/entrypoi
 88032e85d669        a2eb12050715                <span class="s2">&quot;/bin/bash&quot;</span>              <span class="m">9</span> days ago          Up <span class="m">2</span> days                                                            compiler
 </code></pre></div>
 
+
 <p>Next get a shell inside the container:</p>
 <div class="codehilite"><pre><span></span><code>$ docker <span class="nb">exec</span> -it autolab bash
 root@be56be775428:/home/app/webapp#
 </code></pre></div>
+
 
 <p>By default we are in the project directory. Navigate to the <code>logs</code> directory and <code>cat</code> or <code>tail</code> <code>production.log</code>. This contains logs from the Autolab application itself.</p>
 <div class="codehilite"><pre><span></span><code>root@be56be775428:/home/app/webapp# <span class="nb">cd</span> log
 root@be56be775428:/home/app/webapp/log# tail -f -n +1 production.log
 </code></pre></div>
 
+
 <p>We can also check out our Nginx logs in <code>/var/log/nginx/</code>:</p>
 <div class="codehilite"><pre><span></span><code>root@be56be775428:/home/app/webapp/log# <span class="nb">cd</span> /var/log/nginx/
 root@be56be775428:/var/log/nginx# ls
 access.log  error.log
 </code></pre></div>
+
 
 <h3 id="accessing-the-rails-console">Accessing the Rails console</h3>
 <p>Obtain a shell in the <code>autolab</code> container as described <a href="#checking-autolab-logs">previously</a>, and do <code>RAILS_ENV=production bundle exec rails c</code>:</p>
@@ -1293,6 +1339,7 @@ Loading production environment <span class="o">(</span>Rails <span class="m">5</
 <span class="m">2</span>.6.6 :001 &gt; User.all.count
 <span class="o">=</span>&gt; <span class="m">1</span>
 </code></pre></div>
+
 
 <p>In the example above, if you performed <code>make create-user</code> you should have at least one user in your database. If there are errors connecting to a database here it is likely that the database was misconfigured.</p>
 <h3 id="checking-tango-logs">Checking Tango Logs</h3>
@@ -1304,11 +1351,13 @@ Tango  tango_job_manager_log.log  tango_log.log
 root@a5b77b5267b1:/opt/TangoService# tail -f -n +1 tango_job_manager_log.log tango_log.log
 </code></pre></div>
 
+
 <h3 id="troubleshooting-autolabtango-connection">Troubleshooting Autolab/Tango Connection</h3>
 <p>In the Autolab container, try to curl Tango:</p>
 <div class="codehilite"><pre><span></span><code>root@be56be775428:/home/app/webapp# curl tango:3000
 Hello, world! RESTful Tango here!
 </code></pre></div>
+
 
 <p>In the Tango container, try to curl Autolab:</p>
 <div class="codehilite"><pre><span></span><code>root@a5b77b5267b1:/opt/TangoService/Tango# curl autolab
@@ -1321,10 +1370,12 @@ Hello, world! RESTful Tango here!
 &lt;/html&gt;
 </code></pre></div>
 
+
 <h3 id="permission-issues-in-autolab">Permission issues in Autolab</h3>
 <p>Run the following again:</p>
 <div class="codehilite"><pre><span></span><code>make set-perms
 </code></pre></div>
+
 
 <h3 id="restarting-autolab-passenger-server">Restarting Autolab Passenger Server</h3>
 <p>This is useful when you might want to test out some code change within the Autolab container without having to rebuild everything again. These changes can be applied by just restarting the Passenger service that is serving Autolab.</p>
@@ -1340,12 +1391,14 @@ Cancel
 Restarting /home/app/webapp <span class="o">(</span>production<span class="o">)</span>
 </code></pre></div>
 
+
 <h2 id="troubleshooting">Troubleshooting</h2>
 <h3 id="error-unable-to-unlink-old-dbschemarb-permission-denied">error: unable to unlink old 'db/schema.rb': Permission denied</h3>
 <p>If you obtain the following error when attempting to perform <code>make update</code>:</p>
 <div class="codehilite"><pre><span></span><code>error: unable to unlink old <span class="s1">&#39;db/schema.rb&#39;</span>: Permission denied
 fatal: Could not reset index file to revision <span class="s1">&#39;HEAD&#39;</span>.
 </code></pre></div>
+
 
 <p>This is due to the fact that <code>db/schema.rb</code> is updated whenever migrations are performed. <code>db/schema.rb</code> documents the database schema, which depends on the database that you are using, its version, and when the migrations were run. It is likely that your <code>db/schema.rb</code> will diverge from the one generated by the devs.</p>
 <p>You can resolve this by changing the owner of the files to be your current user, and then running <code>make set-perms</code> afterwards when you start the containers again.</p>
@@ -1443,10 +1496,10 @@ fatal: Could not reset index file to revision <span class="s1">&#39;HEAD&#39;</s
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/troubleshoot/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -445,6 +445,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -522,6 +524,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -970,8 +986,9 @@ please contact us at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#117
 <h4 id="ubuntu-script-bugs">Ubuntu Script Bugs</h4>
 <p>If you get the following error</p>
 <div class="codehilite"><pre><span></span><code>Failed to fetch http://dl.google.com/linux/chrome/deb/dists/stable/Release
-Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#39;</span> in Release file <span class="o">(</span>Wrong sources.list entry or malformed file<span class="o">)</span>
+Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#39;</span> <span class="k">in</span> Release file <span class="o">(</span>Wrong sources.list entry or malformed file<span class="o">)</span>
 </code></pre></div>
+
 
 <p>then follow the solution in <a href="http://askubuntu.com/questions/743814/unable-to-find-expected-entry-main-binary-i386-packages-chrome">this post</a>.</p>
 <h4 id="where-do-i-find-the-mysql-username-and-password">Where do I find the MySQL username and password?</h4>
@@ -980,9 +997,11 @@ Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#3
 <div class="codehilite"><pre><span></span><code>sudo /usr/local/mysql/support-files/mysql.server start
 </code></pre></div>
 
+
 <p>Set the password:</p>
 <div class="codehilite"><pre><span></span><code>mysqladmin -u root password <span class="s2">&quot;[New_Password]&quot;</span>
 </code></pre></div>
+
 
 <p>If you lost your root password, refer to the <a href="http://dev.mysql.com/doc/refman/5.7/en/resetting-permissions.html">MySQL wiki</a></p>
 <h4 id="bundle-install-errors">Bundle Install Errors</h4>
@@ -991,18 +1010,22 @@ Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#3
 <div class="codehilite"><pre><span></span><code>bundle config build.eventmachine --with-cppflags<span class="o">=</span>-I/usr/local/opt/openssl/include
 </code></pre></div>
 
+
 <p><code>libv8</code></p>
 <div class="codehilite"><pre><span></span><code>bundle config build.libv8 --with-system-v8
 </code></pre></div>
+
 
 <p>Run <code>bundle install</code> again</p>
 <p>If this does not work, another option would be</p>
 <div class="codehilite"><pre><span></span><code>bundle update libv8
 </code></pre></div>
 
+
 <p>Because updating libv8 has dependency on other gems, it might fail due to a need to update other gems. Just do</p>
 <div class="codehilite"><pre><span></span><code>bundle update &lt;gem&gt;
 </code></pre></div>
+
 
 <p>according to the error messages until all gems are up to date.</p>
 <p>Run <code>bundle install</code> again</p>
@@ -1015,8 +1038,9 @@ Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#3
 <p>If <code>mysql</code> complains that the password is expired, follow the instructions on the second answer on <a href="http://stackoverflow.com/questions/33326065/unable-to-access-mysql-after-it-automatically-generated-a-temporary-password">this post</a></p>
 <h4 id="mysql-syntax-error">MySQL Syntax Error</h4>
 <p>If you get the following error</p>
-<div class="codehilite"><pre><span></span><code>Mysql2::Error: You have an error in your SQL syntax
+<div class="codehilite"><pre><span></span><code>Mysql2::Error: You have an error <span class="k">in</span> your SQL syntax
 </code></pre></div>
+
 
 <p>this may be an issue with using an incompatible version of MySQL. Try switching to MySQL 5.7 if you are currently using a different version.</p>
 <h4 id="undefined-method-devise-for-user">Undefined method 'devise' for User</h4>
@@ -1115,10 +1139,10 @@ Unable to find expected entry <span class="s1">&#39;main/binary-i386/Packages&#3
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

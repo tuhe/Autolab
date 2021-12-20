@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/instructors/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -446,6 +446,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/github_integration/" class="md-nav__link">
+        Github Integration Setup
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -556,6 +570,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -656,6 +672,13 @@
         <li class="md-nav__item">
   <a href="#overriding-category-and-course-averages" class="md-nav__link">
     Overriding Category and Course Averages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-submision-file-mime-type-check" class="md-nav__link">
+    Customizing Submision File MIME Type Check
   </a>
   
 </li>
@@ -1043,12 +1066,14 @@
 <p><em>Users</em> are either <em>instructors</em>, <em>course assistants</em>, or <em>students</em>. Instructors have full permissions. Course assistants are only allowed to enter grades. Students see only their own work. Each user is uniquely identified by their email address. You can change the permissions for a particular user at any time. Note that some instructors opt to give some or all of their TAs instructor status.</p>
 <h2 id="roster">Roster</h2>
 <p>The <em>roster</em> holds the list of users. You can add and remove users one at a time, or in bulk by uploading a CSV file in the general Autolab format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">Semester,email,last_name,first_name,school,major,year,grading_policy,courseNumber,courseLecture,section</span>
+<div class="codehilite"><pre><span></span><code>Semester,email,last_name,first_name,school,major,year,grading_policy,courseNumber,courseLecture,section
 </code></pre></div>
 
+
 <p>or in the format that is exported by the CMU S3 service:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">&quot;Semester&quot;,&quot;Course&quot;,&quot;Section&quot;,&quot;Lecture&quot;,&quot;Mini&quot;,&quot;Last Name&quot;,&quot;First Name&quot;,&quot;MI&quot;,&quot;AndrewID&quot;,&quot;Email&quot;,&quot;College&quot;,&quot;Department&quot;,...</span>
+<div class="codehilite"><pre><span></span><code>&quot;Semester&quot;,&quot;Course&quot;,&quot;Section&quot;,&quot;Lecture&quot;,&quot;Mini&quot;,&quot;Last Name&quot;,&quot;First Name&quot;,&quot;MI&quot;,&quot;AndrewID&quot;,&quot;Email&quot;,&quot;College&quot;,&quot;Department&quot;,...
 </code></pre></div>
+
 
 <div class="admonition warning">
 <p class="admonition-title">Attention CMU Instructors:</p>
@@ -1074,7 +1099,7 @@
 <h2 id="important-dates">Important Dates</h2>
 <p>A lab has a <em>start date</em>, <em>due date</em>, <em>end date</em> and <em>grading deadline</em>. The link to a lab becomes visible to students after the start date (it's always visible to instructors). Students can submit until the due date without penalty or consuming grace days. Submission is turned off after the end date. Grades are included in the gradebook's category and course averages only after the grading deadline.</p>
 <h2 id="handinssubmissions">Handins/Submissions</h2>
-<p>Once an assessment is live (past the start date), students can begin submitting handins, where each handin is a single file, which can be either a text file or an archive file (e.g., <code>mm.c</code>, <code>handin.tar</code>).</p>
+<p>Once an assessment is live (past the start date), students can begin submitting handins, where each handin is a single file, which can be either a text file or an archive file (e.g., <code>mm.c</code>, <code>handin.tar</code>). Alternatively, instructors can enable GitHub submission for an assessment in its settings and students can directly link their GitHub account and submit from their repo's corresponding branch. Check <a href="/installation/github_integration">here</a> for how to set up and try our <a href="https://nightly.autolabproject.com/">demo site</a> for a feel of its usage.</p>
 <h2 id="penalties-and-extensions">Penalties and Extensions</h2>
 <p>You can set penalties for late handins, set hard limits on the number of handins, or set soft limits that penalize excessive handins on a sliding scale. You can also give a student an <em>extension</em> that
 extends the due dates and end dates for that student.</p>
@@ -1123,6 +1148,7 @@ extends the due dates and end dates for that student.</p>
 <span class="k">end</span>
 </code></pre></div>
 
+
 <p>This particular lab has four problems called "Autograded Score", "Heap Checker", "Style", and "CorrectnessDeductions". An "Autograded Score" less than 50 is set to zero when the raw score is calculated.</p>
 <p>Note: To make this change live, you must select the "Reload config file" option on the <code>malloclab</code> page.</p>
 <h2 id="overriding-category-and-course-averages">Overriding Category and Course Averages</h2>
@@ -1140,6 +1166,7 @@ extends the due dates and end dates for that student.</p>
 <span class="k">end</span>
 </code></pre></div>
 
+
 <p>In this case, labs are worth a total of 50/100 normalized points. The assessment called <code>datalab</code> is graded out of a total of 63 points and is worth 6/50 normalized points.</p>
 <p>Here is the Ruby function for category "Exam":</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># In course.rb file</span>
@@ -1150,6 +1177,7 @@ extends the due dates and end dates for that student.</p>
 <span class="k">end</span>
 </code></pre></div>
 
+
 <p>In this case, exams are worth 50/100 normalized points. The assessment called <code>midterm</code> is graded out of total of 60 points and is worth 20/50 normalized points.</p>
 <p>The course average is computed by a default Ruby function called <code>courseAverage</code>, which can be overridden by the <code>course.rb</code> file in the course directory. Here is the function for our running example:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># In course.rb file</span>
@@ -1159,8 +1187,39 @@ extends the due dates and end dates for that student.</p>
 <span class="k">end</span>
 </code></pre></div>
 
+
 <p>In this course, the course average is the sum of the category averages for "Lab" and "Exam".</p>
 <p>Note: To make these changes live, you must select "Reload course config file" on the "Manage course" page.</p>
+<h2 id="customizing-submision-file-mime-type-check">Customizing Submision File MIME Type Check</h2>
+<p>By default, Autolab does not perform MIME type check for submission files. However, it allows instructors to define their own MIME type check method in the assessment config file. The corresponding function is <code>checkMimeType</code> in <code>&lt;labname&gt;.rb</code> file. For example, to prevent students from submitting a binary file to the assessment <code>malloclab</code>, you might add the following <code>checkMimeType</code> function to <code>malloclab/malloclab.rb</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># In malloclab/malloclab.rb file</span>
+<span class="k">def</span> <span class="nf">checkMimeType</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">contentType</span> <span class="o">!=</span> <span class="s2">&quot;application/octet-stream&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>As of now, the only way to provide a more informative message to student is to raise an error:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># In malloclab/malloclab.rb file</span>
+<span class="k">def</span> <span class="nf">checkMimeType</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="s2">&quot;Do not submit binary files!&quot;</span> <span class="k">if</span> <span class="n">contentType</span> <span class="o">==</span> <span class="s2">&quot;application/octet-stream&quot;</span>
+
+    <span class="k">return</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>This results in the following error message to students when they attempt to submit binary files.</p>
+<p><img alt="MIME Type Check" src="/images/mime_type_check.png" /></p>
+<p>Alternatively, you can use the file name to do file type check. The following snippet prevents students from submitting python files:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">checkMimeType</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fileName</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">[-</span><span class="mi">1</span><span class="o">]</span> <span class="o">!=</span> <span class="s2">&quot;py&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+
+<p>Note that this function does not have access to Rails controller attributes such as <code>flash</code> or <code>params</code>. Attempts to access what's beyond the arguments passed to the function will result in an error.</p>
+<p>Note: To make this change live, you must select the "Reload config file" option on the <code>malloclab</code> page.</p>
 <h2 id="handin-history">Handin History</h2>
 <p>For each lab, students can view all of their submissions, including any source code, and the problem scores, penalties, and total scores associated with those submissions, via the <em>handin history</em> page.</p>
 <h2 id="gradesheet">Gradesheet</h2>
@@ -1278,10 +1337,10 @@ extends the due dates and end dates for that student.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

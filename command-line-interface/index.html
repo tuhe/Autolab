@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/command-line-interface/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -446,6 +446,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/github_integration/" class="md-nav__link">
+        Github Integration Setup
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -706,6 +720,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -975,11 +991,13 @@
 <div class="codehilite"><pre><span></span><code>$ autolab courses
 </code></pre></div>
 
+
 <p><img alt="autolab-cli courses" src="/images/api/api-cli-courses.png" /></p>
 <p>This will show you a list of ongoing courses in the form <code>unique_name (Display name)</code>. You should use the 'unique_name' of each course when interacting with autolab-cli.</p>
 <p>To view the assessments of a course, run</p>
 <div class="codehilite"><pre><span></span><code>$ autolab asmts &lt;course_unique_name&gt;
 </code></pre></div>
+
 
 <p>This will show you a list of assessments in the same <code>unique_name (Display name)</code> format.</p>
 <h2 id="downloading-an-assessment">Downloading an assessment</h2>
@@ -987,17 +1005,20 @@
 <div class="codehilite"><pre><span></span><code>$ autolab download &lt;course_unique_name&gt;:&lt;asmt_unique_name&gt;
 </code></pre></div>
 
+
 <p><img alt="autolab-cli download" src="/images/api/api-cli-download.png" /></p>
 <p>This will create a directory with the assessment name in your current directory, and download the handout and writeup in it. This new directory is called an 'assessment directory'. Whenever you're inside an assessment directory, autolab-cli will respond according to the context.</p>
 <p>For example, when you're inside an assessment directory, you can run</p>
 <div class="codehilite"><pre><span></span><code>$ autolab problems
 </code></pre></div>
 
+
 <p>This will show you the problems of this assessment.</p>
 <h2 id="submitting-solutions">Submitting solutions</h2>
 <p>To submit to an assessment inside an assessment directory, run</p>
 <div class="codehilite"><pre><span></span><code>$ autolab submit &lt;filename&gt;
 </code></pre></div>
+
 
 <p><img alt="autolab-cli submit" src="/images/api/api-cli-submit.png" /></p>
 <p>Yep, it's that easy.</p>
@@ -1006,16 +1027,19 @@
 <div class="codehilite"><pre><span></span><code>$ autolab scores
 </code></pre></div>
 
+
 <p><img alt="autolab-cli scores" src="/images/api/api-cli-scores.png" /></p>
 <p>The scores command will only return scores for those submissions that are made via this client. This is a privacy constraint of the Autolab API.</p>
 <p>To view the feedback you got, run</p>
 <div class="codehilite"><pre><span></span><code>$ autolab feedback
 </code></pre></div>
 
+
 <h2 id="advanced-features">Advanced features</h2>
 <p>You can learn more about each sub-command by running</p>
 <div class="codehilite"><pre><span></span><code>$ autolab &lt;sub-command&gt; -h
 </code></pre></div>
+
 
 <p>This will reveal other flags you may be able to use with each command. For example, you can call all of the context-dependent commands outside of an assessment directory by providing the <code>&lt;course_unique_name&gt;:&lt;asmt_unique_name&gt;</code> pair.</p>
 <p>We hope this speeds up your workflow! If you find any problems, please file an issue on the <a href="https://github.com/autolab/autolab-cli" target="_blank">Autolab CLI Repository</a>.</p>
@@ -1113,10 +1137,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

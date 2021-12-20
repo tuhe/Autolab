@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/features/formatted-feedback/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -446,6 +446,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/github_integration/" class="md-nav__link">
+        Github Integration Setup
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -612,6 +626,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -957,6 +973,7 @@
 <div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span> <span class="p">}</span> <span class="p">}</span>
 </code></pre></div>
 
+
 <p>Autolab will simply display the raw output as produced by the autograder</p>
 <p><img alt="Default Feedback" src="/images/feedback/default.png" /></p>
 <h3 id="semantic-feedback-minimal">Semantic Feedback (Minimal)</h3>
@@ -964,6 +981,7 @@
 <div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;_presentation&quot;</span><span class="p">:</span> <span class="s2">&quot;semantic&quot;</span><span class="p">}</span>
 <span class="p">{</span> <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span> <span class="p">}</span> <span class="p">}</span>
 </code></pre></div>
+
 
 <p>we can invoke the semantic layout, which will display the both the raw output and a formatted table of scores.</p>
 <p><img alt="Semantic Minimal" src="/images/feedback/semantic_minimal.gif" /></p>
@@ -973,6 +991,7 @@
 <div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;_presentation&quot;</span><span class="p">:</span> <span class="s2">&quot;semantic&quot;</span><span class="p">,</span> <span class="nt">&quot;stages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Test Results&quot;</span><span class="p">],</span> <span class="nt">&quot;Test Results&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Build&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="nt">&quot;Run&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">}}}</span>
 <span class="p">{</span><span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}}</span>
 </code></pre></div>
+
 
 <p><strong>Prettified JSON (for reference only)</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -990,6 +1009,7 @@
 <span class="p">{</span><span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}}</span>
 </code></pre></div>
 
+
 <p>We would add <code>["Test Results"]</code> to the stages key. Then we would add to the  corresponding <code>Test Results</code> key an object containing all the test case results. In this case <code>Build</code> and <code>Run</code> were used, but you can use other names for the test cases as well.</p>
 <p><img alt="Semantic with Test Cases" src="/images/feedback/semantic_with_test_case.gif" /></p>
 <h3 id="semantic-feedback-multi-stage">Semantic Feedback (Multi-Stage)</h3>
@@ -998,6 +1018,7 @@
 <div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;_presentation&quot;</span><span class="p">:</span> <span class="s2">&quot;semantic&quot;</span><span class="p">,</span> <span class="nt">&quot;stages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Build&quot;</span><span class="p">,</span> <span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="s2">&quot;Timing&quot;</span><span class="p">],</span> <span class="nt">&quot;Test&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Add Things&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="nt">&quot;Return Values&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nt">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;You need to return 1&quot;</span><span class="p">}},</span> <span class="nt">&quot;Build&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;compile&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;passed&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">}},</span> <span class="nt">&quot;Timing&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Stage 1 (ms)&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nt">&quot;Stage 2 (ms)&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}}</span>
 <span class="p">{</span><span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}}</span>
 </code></pre></div>
+
 
 <p><strong>Prettified JSON (for reference only)</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -1027,6 +1048,7 @@
 <span class="p">}</span>
 <span class="p">{</span><span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;Correctness&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nt">&quot;TA/Design/Readability&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}}</span>
 </code></pre></div>
+
 
 <p>We would add the stages we want into the <code>stages</code> array. Then we would add those corresponding stages as a separate key, with each of them holding their own set of test case results. We are also able to provide hints if the student gets the particular test case wrong by adding a <code>hint</code> key to the test case.</p>
 <p><img alt="Semantic Multistage with Hint" src="/images/feedback/semantic_multistage_with_hint.gif" /></p>
@@ -1124,10 +1146,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

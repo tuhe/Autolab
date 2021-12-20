@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/one-click/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -438,6 +438,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -898,12 +912,14 @@
 <p><strong>Optional:</strong></p>
 <p>For better experience, we also recommend you to "insert guest additional CD image" for your virtual machine to enable full screen.
 (If you installed Ubuntu 16+, you can skip this)</p>
-<div class="codehilite"><pre><span></span><code><span class="err">Devices &gt; Insert guest additional CD image</span>
+<div class="codehilite"><pre><span></span><code>Devices &gt; Insert guest additional CD image
 </code></pre></div>
 
+
 <p>Also enable clipboard share for easier copy and paste between host and VM.</p>
-<div class="codehilite"><pre><span></span><code><span class="err">Settings &gt; Advanced &gt; Shared Clipboard &gt; Bidrectional</span>
+<div class="codehilite"><pre><span></span><code>Settings &gt; Advanced &gt; Shared Clipboard &gt; Bidrectional
 </code></pre></div>
+
 
 <p>You need to restart your virtual machine to validate these optional changes.</p>
 <h3 id="2-download">2. Download</h3>
@@ -911,14 +927,17 @@
 <div class="codehilite"><pre><span></span><code>sudo -i
 </code></pre></div>
 
+
 <p>Clone repo:</p>
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/autolab/autolab-oneclick.git<span class="p">;</span> <span class="nb">cd</span> autolab-oneclick
 </code></pre></div>
+
 
 <h3 id="3-installation">3. Installation</h3>
 <p>Run the following in the autolab-oneclick folder</p>
 <div class="codehilite"><pre><span></span><code>./install.sh -l
 </code></pre></div>
+
 
 <p>This will take a few minutes. Once you see <code>Autolab Installation Finished</code>, ensure all docker containers are running:</p>
 <div class="codehilite"><pre><span></span><code>docker ps
@@ -927,6 +946,7 @@
 <span class="c1"># 45a9e30241ea        mysql               &quot;docker-entrypoint...&quot;   3 months ago        Exited (0) 3 months ago   0.0.0.0:32768-&gt;3306/tcp   local_db_1          0 B (virtual 383 MB)</span>
 <span class="c1"># 1ef089e2dca4        local_tango         &quot;sh start.sh&quot;            3 months ago        Exited (0) 3 months ago   0.0.0.0:8600-&gt;8600/tcp    local_tango_1       91.1 kB (virtual 743 MB)</span>
 </code></pre></div>
+
 
 <p>Now Autolab is successfully installed and running on your virtual machine.
 Open your browser and visit <code>localhost:3000</code>, you will see the landing page of Autolab.</p>
@@ -986,11 +1006,13 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 <div class="codehilite"><pre><span></span><code>sudo -i
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Clone the installation package</p>
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/autolab/autolab-oneclick.git<span class="p">;</span> <span class="nb">cd</span> autolab-oneclick
 </code></pre></div>
+
 
 </li>
 <li>
@@ -998,10 +1020,12 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 <div class="codehilite"><pre><span></span><code>python -c <span class="s2">&quot;import random; print hex(random.getrandbits(512))[2:-1]&quot;</span>
 </code></pre></div>
 
+
 <p>Update the values in <code>server/configs/devise.rb</code></p>
 <div class="codehilite"><pre><span></span><code><span class="n">config</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="o">&lt;</span><span class="no">GENERATED_SECRET_KEY</span><span class="o">&gt;</span>
 <span class="n">config</span><span class="o">.</span><span class="n">mailer_sender</span> <span class="o">=</span> <span class="o">&lt;</span><span class="no">EMAIL_ADDRESS_WITH_YOUR_HOSTNAME</span><span class="o">&gt;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1016,9 +1040,11 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 <span class="c1"># add_header Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot;;</span>
 </code></pre></div>
 
+
 <p>Comment out the following line in <code>server/configs/production.rb</code></p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># config.middleware.use Rack::SslEnforcer, :except =&gt; [ /log_submit/, /local_submit/ ]</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1027,6 +1053,7 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 <span class="n">ssl_certificate</span> <span class="sr">/path/</span><span class="n">to</span><span class="o">/</span><span class="n">ssl_certificate</span><span class="o">/</span><span class="n">file</span>
 <span class="n">ssl_certificate_key</span> <span class="sr">/path/</span><span class="n">to</span><span class="o">/</span><span class="n">ssl_certificate_key</span><span class="o">/</span><span class="n">file</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1041,6 +1068,7 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 ./install.sh -s
 </code></pre></div>
 
+
 <p>Answer the prompts and wait until you see <code>Autolab Installation Finished</code>.</p>
 </li>
 <li>
@@ -1052,6 +1080,7 @@ Open your browser and visit <code>localhost:3000</code>, you will see the landin
 <span class="c1"># 1ef089e2dca4        local_tango         &quot;sh start.sh&quot;            3 months ago        Exited (0) 3 months ago   0.0.0.0:8600-&gt;8600/tcp    local_tango_1       91.1 kB (virtual 743 MB)</span>
 </code></pre></div>
 
+
 </li>
 </ol>
 <p>Now Autolab is successfully installed and running on your virtual machine.
@@ -1062,6 +1091,7 @@ Open your browser and visit <code>https://yourdomainname</code>, to see the land
 <div class="codehilite"><pre><span></span><code>email: admin@foo.bar
 password: adminfoobar
 </code></pre></div>
+
 
 <p>We have populated dummy data for you to test with.</p>
 <p>Run the following commands to cleanup the dummy data:</p>
@@ -1127,10 +1157,10 @@ docker-compose run --rm -e <span class="nv">RAILS_ENV</span><span class="o">=</s
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

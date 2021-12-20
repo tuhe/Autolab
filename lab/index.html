@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/lab/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -446,6 +446,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/github_integration/" class="md-nav__link">
+        Github Integration Setup
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -570,6 +584,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -1070,10 +1086,12 @@ The autograder processes these files and generates arbitrary text lines on stdou
 <div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Prob1&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nt">&quot;Prob2&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}</span> <span class="p">}</span>
 </code></pre></div>
 
+
 <p>assigns 10 points to "Prob1" and 5 points to "Prob2" for this submission. The names of the problems must exactly match the names of the problems for this lab on the Autolab web site. Not all problems need to be autograded. For example, there might be a problem for this assessment called "Style" that you grade manually after the due date.</p>
 <p>If you used the Autolab web site to configure a scoreboard for this lab with three columns called "Prob1", "Prob2", and "Total", then the autoresult might be:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;Prob1&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nt">&quot;Prob2&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="p">},</span> <span class="nt">&quot;scoreboard&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span> <span class="p">}</span>
 </code></pre></div>
+
 
 <p>By convention, an autograder accepts an optional <code>-A</code> command line argument that tells it to emit the JSON autoresult. So if you run the autograder outside of the context of Autolab, you can suppress the autoresult line by calling the autograder without the <code>-A</code> argument.</p>
 <p>One of the nice properties of Autolab autograders is that they can be written and tested offline, without requiring any interaction with Autolab. Writing autograders is not easy, but the fact that they can be developed offline allows you to develop and test them in your own familiar computing environment.</p>
@@ -1124,7 +1142,7 @@ The autograder processes these files and generates arbitrary text lines on stdou
 <h3 id="directory-structure">Directory Structure</h3>
 <p>Autolab expects to find the <code>autograde-Makefile</code>and <code>autograde.tar</code> files in the <code>hello</code> lab directory, but otherwise places no constraints on the contents and organization of this directory. However, based on our experience, we strongly recommend a directory structure with the following form:</p>
 <p><a href="https://github.com/autolab/Autolab/tree/master/examples/hello/README" target="_blank">hello/README</a>:</p>
-<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Basic files created by the lab author
+<div class="codehilite"><pre><span></span><code><span class="gh"># Basic files created by the lab author</span>
 
 Makefile              Builds the lab from src/
 README
@@ -1133,7 +1151,7 @@ src/                  Contains all src files and solutions
 test-autograder/      For testing autograder offline
 writeup/              Lab writeup that students view from Autolab
 
-<span class="gh">#</span> Files created by running make
+<span class="gh"># Files created by running make</span>
 
 hello-handout/        The directory that is handed out to students, created
                       using files from src/.
@@ -1141,13 +1159,14 @@ hello-handout.tar     Archive of hello-handout directory
 autograde.tar         File that is copied to the autograding instance
                       (along with autograde-Makefile and student handin file)
 
-<span class="gh">#</span> Files created and managed by Autolab
+<span class="gh"># Files created and managed by Autolab</span>
 
 handin/               All students handin files
 hello.rb              Config file
 hello.yml             Database properties that persist from semester to semester
 log.txt               Log of autograded submissions
 </code></pre></div>
+
 
 <p>The key idea with this directory structure is to place <em>all</em> code for the lab in the <code>src</code> directory, including the autograding code and any starter code handed out to students in the handout directory (<code>hello-handout.tar</code> in this example). Keeping all hard state in the <code>src</code> directory helps limit inconsistencies.</p>
 <p>The main makefile creates <code>hello-handout</code> by copying files from <code>src</code>, and then tars it up:</p>
@@ -1197,23 +1216,25 @@ log.txt               Log of autograded submissions
     rm -rf handin/*
 </code></pre></div>
 
+
 <p>Filenames are disambiguated by appending <code>-handout</code>, which is stripped when they are copied to the handout directory. For example, <code>src/hello.c</code> is the instructor's solution file, and <code>src/hello.c-handout</code> is the starter code that is given to the students in <code>hello-handout/hello.c</code>. And <code>src/README</code> is the README for the src directory and <code>src/README-handout</code> is the README that is handed out to students in <code>hello-handout/README</code>.</p>
 <p>To build the lab, type <code>make clean; make</code>. You can do this as often as you like while the lab is live with no adverse effects. However, be careful to never type <code>make cleanallfiles</code> while the lab is live; this should only be done before the lab goes live; never during or after.</p>
 <h3 id="source-directory">Source Directory</h3>
 <p>The <a href="https://github.com/autolab/Autolab/tree/master/examples/hello/src" target="_blank">hello/src/</a> directory
 contains <em>all</em> of the code files for the Hello Lab, including the files that are handed out to students:</p>
 <p><a href="https://github.com/autolab/Autolab/tree/master/examples/hello/src/README" target="_blank">hello/src/README</a>:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">#</span> <span class="n">Autograder</span> <span class="k">and</span> <span class="n">solution</span> <span class="n">files</span>
-<span class="n">Makefile</span>                <span class="n">Makefile</span> <span class="k">and</span> <span class="p">...</span>
-<span class="n">README</span>                  <span class="p">...</span> <span class="n">README</span> <span class="k">for</span> <span class="n">this</span> <span class="n">directory</span>
-<span class="n">driver</span><span class="p">.</span><span class="n">sh</span><span class="o">*</span>              <span class="n">Autograder</span>
-<span class="n">hello</span><span class="p">.</span><span class="k">c</span>                 <span class="n">Solution</span> <span class="n">hello</span><span class="p">.</span><span class="k">c</span> <span class="n">file</span>
+<div class="codehilite"><pre><span></span><code># <span class="nv">Autograder</span> <span class="nv">and</span> <span class="nv">solution</span> <span class="nv">files</span>
+<span class="nv">Makefile</span>                <span class="nv">Makefile</span> <span class="nv">and</span> ...
+<span class="nv">README</span>                  ... <span class="nv">README</span> <span class="k">for</span> <span class="nv">this</span> <span class="nv">directory</span>
+<span class="nv">driver</span>.<span class="nv">sh</span><span class="o">*</span>              <span class="nv">Autograder</span>
+<span class="nv">hello</span>.<span class="nv">c</span>                 <span class="nv">Solution</span> <span class="nv">hello</span>.<span class="nv">c</span> <span class="nv">file</span>
 
-<span class="o">#</span> <span class="n">Files</span> <span class="n">that</span> <span class="k">are</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
-<span class="n">Makefile</span><span class="o">-</span><span class="n">handout</span>        <span class="n">Makefile</span> <span class="k">and</span> <span class="p">...</span>
-<span class="n">README</span><span class="o">-</span><span class="n">handout</span>          <span class="p">...</span> <span class="n">README</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
-<span class="n">hello</span><span class="p">.</span><span class="k">c</span><span class="o">-</span><span class="n">handout</span>         <span class="n">Blank</span> <span class="n">hello</span><span class="p">.</span><span class="k">c</span> <span class="n">file</span> <span class="n">handed</span> <span class="k">out</span> <span class="k">to</span> <span class="n">students</span>
+# <span class="nv">Files</span> <span class="nv">that</span> <span class="nv">are</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
+<span class="nv">Makefile</span><span class="o">-</span><span class="nv">handout</span>        <span class="nv">Makefile</span> <span class="nv">and</span> ...
+<span class="nv">README</span><span class="o">-</span><span class="nv">handout</span>          ... <span class="nv">README</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
+<span class="nv">hello</span>.<span class="nv">c</span><span class="o">-</span><span class="nv">handout</span>         <span class="nv">Blank</span> <span class="nv">hello</span>.<span class="nv">c</span> <span class="nv">file</span> <span class="nv">handed</span> <span class="nv">out</span> <span class="nv">to</span> <span class="nv">students</span>
 </code></pre></div>
+
 
 <h3 id="handout-directory">Handout Directory</h3>
 <p>The <a href="https://github.com/autolab/Autolab/tree/master/examples/hello/hello-handout/" target="_blank">hello/hello-handout/</a> directory
@@ -1236,6 +1257,7 @@ $ ./<span class="n">driver</span>.<span class="n">sh</span>
 <span class="n">hello</span>.<span class="n">c</span>         <span class="n">Empty</span> <span class="n">C</span> <span class="nb">file</span> <span class="n">that</span> <span class="n">you</span> <span class="n">will</span> <span class="n">edit</span>
 </code></pre></div>
 
+
 <p><a href="https://github.com/autolab/Autolab/tree/master/examples/hello/hello-handout/Makefile" target="_blank">hello/hello-handout/Makefile</a> contains the rules that compile the student source code:</p>
 <div class="codehilite"><pre><span></span><code><span class="c"># Student makefile for the Hello Lab</span>
 <span class="nf">all</span><span class="o">:</span>
@@ -1245,10 +1267,12 @@ $ ./<span class="n">driver</span>.<span class="n">sh</span>
     rm -rf *~ hello
 </code></pre></div>
 
+
 <p>To compile and run their code, students type:</p>
 <div class="codehilite"><pre><span></span><code>$ make clean<span class="p">;</span> make
 $ ./hello
 </code></pre></div>
+
 
 <h3 id="autograder">Autograder</h3>
 <p>The autograder for the Hello Lab is a trivially simple bash script called <code>driver.sh</code> that compiles and runs <code>hello.c</code> and verifies that it returns with an exit status of zero:</p>
@@ -1285,6 +1309,7 @@ $ ./hello
 <span class="nb">exit</span>
 </code></pre></div>
 
+
 <p>For example:</p>
 <div class="codehilite"><pre><span></span><code>$ ./driver.sh
 <span class="c1"># Compiling hello.c</span>
@@ -1295,6 +1320,7 @@ $ ./hello
 <span class="c1"># Success: ./hello runs with an exit status of 0</span>
 <span class="c1"># {&quot;scores&quot;: {&quot;Correctness&quot;: 100}}</span>
 </code></pre></div>
+
 
 <p>Notice that the autograder expects the <code>hello</code> lab on the Autolab front-end to have been defined with a problem called "Correctness", with a maximum value of 100 points. If you forget to define the problems listed in the JSON autoresult, scores will still be logged, but they won't be posted to the database.</p>
 <h3 id="required-autograding-files">Required Autograding Files</h3>
@@ -1310,6 +1336,7 @@ $ ./hello
     rm -rf *~ hello-handout
 </code></pre></div>
 
+
 <p>The makefile expands <code>autograde.tar</code> into <code>hello-handout</code>, copies <code>hello.c</code> (the submission file) into <code>hello-handout</code>, changes directory to <code>hello-handout</code>, builds the autograder, and then runs it.</p>
 <h3 id="test-directory">Test Directory</h3>
 <p>For our labs, we like to setup a test directory (called <code>test-autograder</code> in this example), that allows us to test our <code>autograde-Makefile</code> and <code>autograde-tar</code> files by simulating Autolab's behavior on the autograding instance. The <code>test-autograder</code> directory has the following form:</p>
@@ -1321,6 +1348,7 @@ $ ls -l
 <span class="c1"># -rw-rw-r-- 1 droh users 113 Aug  4 16:44 hello.c</span>
 </code></pre></div>
 
+
 <p>To simulate Autolab's behavior on an autograding instance:</p>
 <div class="codehilite"><pre><span></span><code>$ <span class="nb">cd</span> test-autograder <span class="o">&amp;&amp;</span> make clean <span class="o">&amp;&amp;</span> make
 <span class="c1"># Running ./hello</span>
@@ -1328,6 +1356,7 @@ $ ls -l
 <span class="c1"># Success: ./hello runs with an exit status of 0</span>
 <span class="c1"># {&quot;scores&quot;: {&quot;Correctness&quot;: 100}}</span>
 </code></pre></div>
+
 
 <h3 id="writeup-directory">Writeup directory</h3>
 <p>The <code>hello/writeup</code> contains the detailed lab writeup, either html or pdf file, that students can download from the Autolab front end.</p>
@@ -1428,10 +1457,10 @@ $ ls -l
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

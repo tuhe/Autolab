@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/osx/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -447,6 +447,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -901,6 +915,7 @@
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 </code></pre></div>
 
+
 <p>Restart your shell at this point in order to start using your newly installed rbenv</p>
 </li>
 <li>
@@ -909,11 +924,13 @@
 git clone https://github.com/autolab/Autolab.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> Autolab
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Install the correct version of ruby:</p>
 <div class="codehilite"><pre><span></span><code>rbenv install <span class="k">$(</span>cat .ruby-version<span class="k">)</span>
 </code></pre></div>
+
 
 <p>At this point, confirm that <code>rbenv</code> is working (you might need to restart your shell):</p>
 <div class="codehilite"><pre><span></span><code>$ which ruby
@@ -923,11 +940,13 @@ $ which rake
 ~/.rbenv/shims/rake
 </code></pre></div>
 
+
 <p>Note that Mac OSX comes with its own installation of ruby. You might need to switch your ruby from
 the system version to the rbenv installed version. One option is to add the following lines to ~/.bash_profile:</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">export</span> <span class="nv">RBENV_ROOT</span><span class="o">=</span>&lt;rbenv folder path on your <span class="nb">local</span> machine&gt;
 <span class="nb">eval</span> <span class="s2">&quot;</span><span class="k">$(</span>rbenv init -<span class="k">)</span><span class="s2">&quot;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -936,12 +955,14 @@ the system version to the rbenv installed version. One option is to add the foll
 rbenv rehash
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Install the required gems (run the following commands in the cloned Autolab repo):</p>
 <div class="codehilite"><pre><span></span><code><span class="nb">cd</span> bin
 bundle install
 </code></pre></div>
+
 
 <p>Refer to <a href="/installation/troubleshoot">Troubleshooting</a> for issues installing gems</p>
 </li>
@@ -957,6 +978,7 @@ bundle install
 <div class="codehilite"><pre><span></span><code>cp config/database.yml.template config/database.yml
 </code></pre></div>
 
+
 <p>Edit <code>database.yml</code> with the correct credentials for your chosen database. Refer to <a href="/installation/troubleshoot">Troubleshooting</a> for any issues.</p>
 </li>
 <li>
@@ -964,21 +986,22 @@ bundle install
 <div class="codehilite"><pre><span></span><code>cp config/school.yml.template config/school.yml
 </code></pre></div>
 
+
 <p>Edit <code>school.yml</code> with your school/organization specific names and emails</p>
 </li>
 <li>
-<p>Configure the Devise Auth System with a unique key (run these commands exactly - leave <code>&lt;YOUR-SECRET-KEY&gt;</code> as it is):</p>
-<div class="codehilite"><pre><span></span><code>cp config/initializers/devise.rb.template config/initializers/devise.rb
-sed -i <span class="s2">&quot;s/&lt;YOUR-SECRET-KEY&gt;/`bundle exec rails secret`/g&quot;</span> config/initializers/devise.rb
+<p>Initialize application secrets.</p>
+<div class="codehilite"><pre><span></span><code>./bin/initialize_secrets.sh
 </code></pre></div>
 
-<p>Fill in <code>&lt;YOUR_WEBSITE&gt;</code> in the <code>config/initializers/devise.rb</code> file. To skip this step for now, fill with <code>foo.bar</code>.</p>
+
 </li>
 <li>
 <p>Create and initialize the database tables:</p>
 <div class="codehilite"><pre><span></span><code>bundle <span class="nb">exec</span> rails db:create
 bundle <span class="nb">exec</span> rails db:migrate
 </code></pre></div>
+
 
 <p>Do not forget to use <code>bundle exec</code> in front of every rake/rails command.</p>
 </li>
@@ -991,11 +1014,13 @@ bundle <span class="nb">exec</span> rails db:migrate
 ./bin/initialize_user.sh -d
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Populate dummy data (for development only):</p>
 <div class="codehilite"><pre><span></span><code>bundle <span class="nb">exec</span> rails autolab:populate
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1003,15 +1028,20 @@ bundle <span class="nb">exec</span> rails db:migrate
 <div class="codehilite"><pre><span></span><code>bundle <span class="nb">exec</span> rails s -p <span class="m">3000</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Go to localhost:3000 and login with either the credentials of the root user you just created, or choose <code>Developer Login</code> with:</p>
 <div class="codehilite"><pre><span></span><code>Email: <span class="s2">&quot;admin@foo.bar&quot;</span>.
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Install <a href="/installation/tango">Tango</a>, the backend autograding service.</p>
+</li>
+<li>
+<p>If you would like to configure Github integration to allow students to submit via Github, please follow the <a href="/installation/github_integration">Github integration setup instructions</a>.</p>
 </li>
 <li>
 <p>Now you are all set to start using Autolab! Visit the <a href="/instructors">Guide for Instructors</a> and <a href="/lab">Guide for Lab Authors</a> pages for more info.</p>
@@ -1111,10 +1141,10 @@ bundle <span class="nb">exec</span> rails db:migrate
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>

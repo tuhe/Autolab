@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://docs.autolabproject.com/installation/tango/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -442,6 +442,20 @@
     <li class="md-nav__item">
       <a href="../mailing/" class="md-nav__link">
         Mailing Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_integration/" class="md-nav__link">
+        Github Integration Setup
       </a>
     </li>
   
@@ -903,6 +917,7 @@
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/autolab/Tango.git<span class="p">;</span> <span class="nb">cd</span> Tango
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Install Redis following <a href="http://redis.io/topics/quickstart" target="_blank">this guide</a>. By default, Tango uses Redis as a stateless job queue. Learn more <a href="https://autolab.github.io/2015/04/making-backend-scalable/" target="_blank">here</a>.</p>
@@ -912,11 +927,13 @@
 <div class="codehilite"><pre><span></span><code>cp config.template.py config.py
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Create the course labs directory where job's output files will go, organized by key and lab name:</p>
 <div class="codehilite"><pre><span></span><code>mkdir courselabs
 </code></pre></div>
+
 
 <p>By default the <code>COURSELABS</code> option in <code>config.py</code> points to the <code>courselabs</code> directory in the Tango directory.
 Change this to specify another path if you wish.</p>
@@ -938,11 +955,13 @@ $ pip install -r requirements.txt
 $ mkdir volumes
 </code></pre></div>
 
+
 </li>
 <li>
 <p>If you are using Docker, set <code>DOCKER_VOLUME_PATH</code> in <code>config.py</code> to be the path to the <code>volumes</code> directory you just created.</p>
 <div class="codehilite"><pre><span></span><code><span class="nv">DOCKER_VOLUME_PATH</span> <span class="o">=</span> <span class="s2">&quot;/path/to/Tango/volumes/&quot;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -950,15 +969,18 @@ $ mkdir volumes
 <div class="codehilite"><pre><span></span><code>$ redis-server
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Run the following command to start the server (producer). If no port is given, the server will run on the port specified in <code>config.py</code> (default: 3000):</p>
 <div class="codehilite"><pre><span></span><code>python restful-tango/server.py &lt;port&gt;
 </code></pre></div>
 
+
 <p>Open another terminal window and start the job manager (consumer):</p>
 <div class="codehilite"><pre><span></span><code>python jobManager.py
 </code></pre></div>
+
 
 <p>For more information on the job producer/consumer model check out our <a href="https://autolab.github.io/2015/04/making-backend-scalable/" target="_blank">blog post</a>.</p>
 </li>
@@ -968,6 +990,7 @@ $ mkdir volumes
 <span class="c1"># Hello, world! RESTful Tango here!</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>You can test the Tango setup using the <a href="/tango-cli/">command line client</a>.</p>
@@ -976,6 +999,7 @@ $ mkdir volumes
 <p>If you are using Tango with Autolab, you have to configure Autolab to use Tango. Go to your Autolab directory and enter the following commands:</p>
 <div class="codehilite"><pre><span></span><code>cp config/autogradeConfig.rb.template config/autogradeConfig.rb
 </code></pre></div>
+
 
 <p>Fill in the correct info for your Tango deployment, mainly the following:</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Hostname for Tango RESTful API</span>
@@ -987,6 +1011,7 @@ $ mkdir volumes
 <span class="c1"># Key for Tango RESTful API</span>
 <span class="no">RESTFUL_KEY</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1009,17 +1034,20 @@ $ mkdir volumes
 <div class="codehilite"><pre><span></span><code>$ git clone https://github.com/autolab/Tango.git<span class="p">;</span> <span class="nb">cd</span> Tango
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Create a <code>config.py</code> file from the given template.  </p>
 <div class="codehilite"><pre><span></span><code>$ cp config.template.py config.py
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Modify <code>DOCKER_VOLUME_PATH</code> in <code>config.py</code> as follows: </p>
 <div class="codehilite"><pre><span></span><code><span class="nv">DOCKER_VOLUME_PATH</span> <span class="o">=</span> <span class="s1">&#39;/opt/TangoService/Tango/volumes/&#39;</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1028,11 +1056,13 @@ $ mkdir volumes
 <span class="c1"># CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Run the following command to build the Tango deployment image.</p>
 <div class="codehilite"><pre><span></span><code>$ docker build --tag<span class="o">=</span><span class="s2">&quot;tango_deployment&quot;</span> .
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1043,11 +1073,13 @@ $ mkdir volumes
 <span class="c1"># ubuntu              15.04               d1b55fd07600        4 minutes ago       131.3 MB</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Run the following command to access the image in a container with a bash shell. The <code>-p</code> flag will map <code>nginxPort</code> on the docker container to <code>localPort</code> (8610 recommended) on your local machine (or on the VM that docker is running in on the local machine) so that Tango is accessible from outside the docker container.</p>
 <div class="codehilite"><pre><span></span><code>$ docker run --privileged -p &lt;localPort&gt;:&lt;nginxPort&gt; -it tango_deployment /bin/bash
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1062,11 +1094,13 @@ $ mkdir volumes
 <div class="codehilite"><pre><span></span><code>$ service supervisor start
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Check to see if Tango is responding to requests</p>
 <div class="codehilite"><pre><span></span><code>$ curl localhost:8610 <span class="c1"># Hello, world! RESTful Tango here!</span>
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1075,14 +1109,16 @@ $ mkdir volumes
 <span class="c1"># CONTAINER ID        IMAGE               COMMAND               NAMES               SIZE</span>
 <span class="c1"># c704d45c3737    tango_deployment       &quot;/bin/bash&quot;            erwin             40.26 MB</span>
 
-The container created in this example has the name <span class="sb">`</span>erwin<span class="sb">`</span>.
+The container created <span class="k">in</span> this example has the name <span class="sb">`</span>erwin<span class="sb">`</span>.
 </code></pre></div>
+
 
 </li>
 <li>
 <p>The name of the production container can be changed by running the following command and will be used to run the container and create services.</p>
 <div class="codehilite"><pre><span></span><code>$ docker rename &lt;old_name&gt; &lt;new_name&gt;
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1091,6 +1127,7 @@ The container created in this example has the name <span class="sb">`</span>erwi
 $ docker attach erwin
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Once the container is set up with the autograding image, and the VMMS configured with any necessary software/environments needed for autograding (java, perl, etc), some configurations need to be changed to make the container daemon ready. Using the <code>CONTAINER ID</code> above, use the following commands to modify that containers <code>config.v2.json</code> file.</p>
@@ -1098,6 +1135,7 @@ $ docker attach erwin
 c704d45c37372a034cb97761d99f6f3f362707cc23d689734895e017eda3e55b
 $ sudo vim /var/lib/docker/containers/c704d45c37372a034cb97761d99f6f3f362707cc23d689734895e017eda3e55b/config.v2.json
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1108,6 +1146,7 @@ $ docker ps -as
 <span class="c1"># c704d45c3737    tango_deployment   &quot;/usr/bin/supervisord&quot;     erwin             40.26 MB</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>At this point when the container is started, the environment is fully set up and will no longer be an interactive shell. Instead, it will be the supervisor service that starts Tango and all its dependencies. Test this with the following commands and ensure Tango is functioning properly.</p>
@@ -1115,6 +1154,7 @@ $ docker ps -as
 <span class="c1"># (Test tango environment)</span>
 $ docker stop erwin
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1137,6 +1177,7 @@ $ docker stop erwin
 <span class="nv">WantedBy</span><span class="o">=</span>default.target
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Test and ensure the service was set up correctly. The service should start successfully and remain running.</p>
@@ -1144,6 +1185,7 @@ $ docker stop erwin
 $ service erwin start
 $ service erwin status
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1153,6 +1195,7 @@ $ sudo reboot
 <span class="c1"># (Server Reboots)</span>
 $ service erwin status
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1164,6 +1207,7 @@ $ service erwin status
 <div class="codehilite"><pre><span></span><code>$ docker ps <span class="c1"># CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Build base Docker image from root Tango directory.</p>
@@ -1172,12 +1216,14 @@ docker build -t autograding_image vmms/
 docker images autograding_image    <span class="c1"># Check if image built</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Update <code>VMMS_NAME</code> in <code>config.py</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="c1"># in config.py</span>
 <span class="n">VMMS_NAME</span> <span class="o">=</span> <span class="s2">&quot;localDocker&quot;</span>
 </code></pre></div>
+
 
 </li>
 </ol>
@@ -1197,6 +1243,7 @@ docker images autograding_image    <span class="c1"># Check if image built</span
     <span class="nv">aws_secret_access_key</span> <span class="o">=</span> myawssecretaccesskey12345
 </code></pre></div>
 
+
 <p>Tango uses the <a href="http://boto.cloudhackers.com/en/latest/" target="_blank">Boto</a> Python package to interface with Amazon Web Services</p>
 </li>
 <li>
@@ -1208,6 +1255,7 @@ docker images autograding_image    <span class="c1"># Check if image built</span
 scp -i /path/my-key-pair.pem -r autodriver/ ubuntu@&lt;ec2-host-name&gt;.compute-1.amazonaws.com:~/
 </code></pre></div>
 
+
 <p>The autodriver is used as a sandbox environment to run the job inside the VM. It limits Disk I/O, Disk Usage, monitors security, and controls other valuable <code>sudo</code> level resources.</p>
 </li>
 <li>
@@ -1217,6 +1265,7 @@ $ make clean<span class="p">;</span> make
 $ cp -p autodriver /usr/bin/autodriver
 </code></pre></div>
 
+
 </li>
 <li>
 <p>Create the <code>autograde</code> Linux user and directory. All jobs will be run under this user.</p>
@@ -1225,6 +1274,7 @@ $ mkdir autograde
 $ chown autograde autograde
 $ chown :autograde autograde
 </code></pre></div>
+
 
 </li>
 <li>
@@ -1251,6 +1301,7 @@ $ chown :autograde autograde
 <span class="nv">INSTANCE_RUNNING</span> <span class="o">=</span> <span class="m">16</span>                <span class="c1"># Status code of a running instance, leave as 16</span>
 </code></pre></div>
 
+
 </li>
 <li>
 <p>You should now be ready to run Tango jobs on EC2! Use the <a href="/tango-cli/">Tango CLI</a> to test your setup.</p>
@@ -1275,7 +1326,7 @@ $ chown :autograde autograde
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../mailing/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Mailing Setup" rel="prev">
+        <a href="../github_integration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Github Integration Setup" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1284,7 +1335,7 @@ $ chown :autograde autograde
               <span class="md-footer__direction">
                 Previous
               </span>
-              Mailing Setup
+              Github Integration Setup
             </div>
           </div>
         </a>
@@ -1350,10 +1401,10 @@ $ chown :autograde autograde
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b1047164.min.js"></script>
       
     
   </body>
