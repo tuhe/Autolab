@@ -4,6 +4,9 @@ tmp/cache/
 tmp/
 !tmp/restart.txt
 
+config/environments/development.rb
+db/autolab_development-back
+# Tue: I added this so it would not publish my password
 # autolab configs
 config/autogradeConfig.rb
 assessmentConfig/

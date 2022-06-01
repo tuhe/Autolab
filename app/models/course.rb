@@ -105,6 +105,7 @@ class Course < ApplicationRecord
     # rubocop:disable Rails/FilePath
     default_course_rb = Rails.root.join("lib", "__defaultCourse.rb")
     # rubocop:enable Rails/FilePath
+    Rails.logger.info 'config files, courses_rb' + course_rb.to_s + " default file" + default_course_rb.to_s
 
     FileUtils.cp default_course_rb, course_rb
 
@@ -164,9 +165,10 @@ class Course < ApplicationRecord
     # validate syntax of config
     RubyVM::InstructionSequence.compile(config_source)
 
-    # backup old config
-    File.rename(dest, dest.sub_ext(".rb.bak"))
-
+    # backup old config - Tue: Added check if exists due to errors.
+    if(File.exist?(dest))
+      File.rename(dest, dest.sub_ext(".rb.bak"))
+    end
     d = File.open(dest, "w")
     d.write("require 'CourseBase.rb'\n\n")
     d.write("module Course#{course.camelize}\n")
